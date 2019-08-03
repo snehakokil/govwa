@@ -4,7 +4,7 @@ pipeline {
     stage('Checkout Go Code') {
       agent any
       steps {
-        git(url: 'https://github.com/paroksh/GoLangSecRepo.git', branch: 'master')
+        git(url: 'https://github.com/paroksh/govwa.git', branch: 'master')
       }
     }
     stage('Run Source Code Review')
