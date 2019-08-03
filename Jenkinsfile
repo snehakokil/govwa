@@ -20,14 +20,13 @@ pipeline {
             docker {
               image 'golang'
               //for cache error
-              args '-e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/usr/local/go/src/govwa'
+              args '-e GOPATH=\'/go/src/govwa\' -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/usr/local/go/src/govwa'
                   }
             }
       steps
       {
         sh 'go env'
         sh 'cd /go/src/'
-        sh 'ENV GOPATH=/go/src/govwa'
         sh 'go env'
         sh 'go get github.com/go-sql-driver/mysql'
         sh 'go get github.com/gorilla/sessions'
