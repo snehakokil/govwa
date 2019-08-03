@@ -28,6 +28,7 @@ pipeline {
         sh 'go env'
         sh 'cd /go/src/'
         sh 'export GOPATH=/go/src/govwa'
+        sh 'go env'
         sh 'go get github.com/go-sql-driver/mysql'
         sh 'go get github.com/gorilla/sessions'
         sh 'go get github.com/julienschmidt/httprouter'
