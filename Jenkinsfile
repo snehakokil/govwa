@@ -20,7 +20,7 @@ pipeline {
             docker {
               image 'golang'
               //for cache error
-              args '-e GOPATH=\'/go/src/govwa\' -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+              args ' -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                   }
             }
       steps
