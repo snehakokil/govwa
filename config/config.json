@@ -2,7 +2,7 @@
     "user": "gosec",
     "password": "gosec321",
     "dbname": "govwa",
-    "sqlhost": "localhost",
+    "sqlhost": "mysql",
     "sqlport": "3306",
     "webserver": "http://localhost",
     "webport": "8082",
