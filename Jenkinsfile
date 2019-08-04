@@ -23,11 +23,10 @@ pipeline {
             }
       }
       steps {
-        {
-        sh 'mysql --version'  
+        sh 'mysql --version'
         }
-      }
     }
+
 
 
     stage('Compile Go Application')
