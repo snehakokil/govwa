@@ -22,6 +22,11 @@ pipeline {
               args '--network my_network my_mysql  --name my_mysql -e MYSQL_ROOT_PASSWORD=admin '
             }
       }
+      steps {
+        {
+        sh 'mysql --version'  
+        }
+      }
     }
 
 
