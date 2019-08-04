@@ -12,7 +12,7 @@ pipeline {
       agent any
       steps{
             sh 'docker network create -d bridge mynetwork'
-            print('Source Code Review Running')
+            print('Source Code Review2 Running')
             }
     }
     stage('Database setup')
