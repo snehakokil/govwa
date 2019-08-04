@@ -20,7 +20,7 @@ pipeline {
       agent {
             docker {
               image 'mysql:latest'
-              args ' --network mynetwork1 --name ammysql -e MYSQL_ROOT_PASSWORD=admin '
+              args '-p 3306:3306 --network mynetwork1 --name ammysql -e MYSQL_ROOT_PASSWORD=admin '
             }
       }
       steps {
@@ -36,7 +36,7 @@ pipeline {
             docker {
               image 'golang'
               //for cache error
-              args ' --network mynetwork1 --name mygolang  -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+              args ' -p 8082:8082 --network mynetwork1 --name mygolang  -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                   }
             }
       steps
