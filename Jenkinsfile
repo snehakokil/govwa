@@ -11,7 +11,7 @@ pipeline {
     {
       agent any
       steps{
-            sh 'docker network create -d bridge mynetwork'
+            sh 'docker network create -d bridge mynetwork1'
             print('Source Code Review2 Running')
             }
     }
@@ -20,7 +20,7 @@ pipeline {
       agent {
             docker {
               image 'mysql:latest'
-              args ' --network mynetwork -e MYSQL_ROOT_PASSWORD=admin '
+              args ' --network mynetwork1 -e MYSQL_ROOT_PASSWORD=admin '
             }
       }
       steps {
@@ -36,7 +36,7 @@ pipeline {
             docker {
               image 'golang'
               //for cache error
-              args ' --network mynetwork -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+              args ' --network mynetwork1 -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                   }
             }
       steps
