@@ -19,8 +19,8 @@ pipeline {
     {
       agent {
             docker {
-              image 'mysql'
-              args '-p 3306:3306 --entrypoint=/bin/bash --network mynetwork1 --name ammysql1 -e MYSQL_ROOT_PASSWORD=admin '
+              image 'mysql/mysql-server:5.7'
+              args '-d -p 3306:3306 --entrypoint=/bin/bash --network mynetwork1 --name ammysql1 -e MYSQL_ROOT_PASSWORD=admin '
             }
       }
       steps {
