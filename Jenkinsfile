@@ -30,8 +30,8 @@ pipeline {
 
 
 
-    stage('Compile Go Application')
-     {
+  //   stage('Compile Go Application')
+  /*   {
       agent {
             docker {
               image 'golang'
@@ -48,6 +48,6 @@ pipeline {
         sh 'go get github.com/julienschmidt/httprouter'
         sh 'go run app.go'
       }
-    }
+    } */
   }
 }
