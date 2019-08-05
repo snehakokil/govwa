@@ -1,6 +1,6 @@
 {
-    "user": "gosec",
-    "password": "gosec321",
+    "user": "root",
+    "password": "root",
     "dbname": "govwa",
     "sqlhost": "localhost",
     "sqlport": "3306",
