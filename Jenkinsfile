@@ -11,11 +11,11 @@ pipeline {
     {
       agent any
       steps{
-            sh 'docker network create -d bridge mynetwork1'
+      //      sh 'docker network create -d bridge mynetwork1'
             print('Source Code Review2 Running')
             }
     }
-    stage('Database setup')
+  /*  stage('Database setup')
     {
       agent {
             docker {
@@ -30,15 +30,16 @@ pipeline {
         }
     }
 
+    */
 
-
-  //   stage('Compile Go Application')
-  /*   {
+   stage('Compile Go Application')
+    {
       agent {
             docker {
               image 'golang'
               //for cache error
-              args ' -p 8082:8082 --network mynetwork1 --name mygolang  -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+              args ' -p 8082:8082 -p 3306:3306  -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+                  //--network mynetwork1 --name mygolang
                   }
             }
       steps
@@ -50,6 +51,6 @@ pipeline {
         sh 'go get github.com/julienschmidt/httprouter'
         sh 'go run app.go'
       }
-    } */
+    }
   }
 }
