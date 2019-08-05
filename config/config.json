@@ -1,6 +1,6 @@
 {
-    "user": "root",
-    "password": "SQL@root1234",
+    "user": "admin",
+    "password": "govwaadmin",
     "dbname": "govwa",
     "sqlhost": "localhost",
     "sqlport": "3306",
