@@ -27,7 +27,6 @@ pipeline {
         sh ' mysql --version'
         sh ' mysql -h 127.0.0.1 -p 3306 -u user -p pass123 firstdb'
         sh ' CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) );'
-        sh ' INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Sureshkumar', 'Deepak', 'Jackal Creek','Johannesburg');'
         }
     }
 
