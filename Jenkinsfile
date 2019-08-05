@@ -20,13 +20,13 @@ pipeline {
       agent {
             docker {
               image 'mysql'
-              args '-d -p 3306:3306 --entrypoint mysql start --network mynetwork1 --name ammysql5 -e MYSQL_ROOT_PASSWORD=admin '
+              args '-d -p 3306:3306 --entrypoint mysql start --network mynetwork1 --name ammysql6 -e MYSQL_ROOT_PASSWORD=admin '
                     }
       }
       steps {
-        sh ' mysql --version'
-        sh ' mysql -h 127.0.0.1 -p 3306 -u user -p pass123 firstdb'
-        sh ' CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) );'
+        sh ' mysql --version '
+        sh ' mysql -h 127.0.0.1 -p 3306 -u user -p pass123 firstdb '
+        sh ' CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) ); '
         }
     }
 
