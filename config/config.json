@@ -1,6 +1,6 @@
 {
     "user": "root",
-    "password": "root",
+    "password": "MYsql@root",
     "dbname": "govwa",
     "sqlhost": "localhost",
     "sqlport": "3306",
