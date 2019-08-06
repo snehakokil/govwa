@@ -91,6 +91,7 @@ func loginAction(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bo
 	uData := checkUserQuery(uname, pass) //handle user data from db
 	if uData.cnt == 1 {
 		fmt.Printf("I am authenticated")
+		fmt.Println("FOO:", os.Getenv("SESSION_SECRET"))
 		s := session.New()
 
 		/* save user data to session */
