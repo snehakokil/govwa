@@ -6,5 +6,5 @@
     "sqlport": "3306",
     "webserver": "http://localhost",
     "webport": "8082",
-    "Sessionkey:": "G0Vw444"
+    "sessionkey": "G0Vw444"
 }
