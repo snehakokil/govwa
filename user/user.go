@@ -50,9 +50,10 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 	/* check database for setup */
 	ok, err := database.CheckDatabase()
 	if !ok || err != nil{
+
 		util.Redirect(w, r, "setup", 302) //if no database will redirect to setup page
 	}
-	
+
 	/* value of data will send to client over template */
 	data := make(map[string]interface{})
 	data["Title"] = "Login"
@@ -89,6 +90,7 @@ func loginAction(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bo
 
 	uData := checkUserQuery(uname, pass) //handle user data from db
 	if uData.cnt == 1 {
+		fmt.Printf("I am authenticated")
 		s := session.New()
 
 		/* save user data to session */
@@ -101,6 +103,7 @@ func loginAction(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bo
 		log.Println("Login Success")
 		return true
 	} else {
+		fmt.Printf("I am not authenticated")
 		return false
 	}
 }
@@ -142,8 +145,8 @@ func checkUserQuery(username, pass string) *UserData {
 
 	const (
 		sql = `SELECT id, uname, COUNT(*) as cnt
-						FROM Users 
-						WHERE uname=? 
+						FROM Users
+						WHERE uname=?
 						AND pass=?`)
 
 	stmt, err := db.Prepare(sql)
