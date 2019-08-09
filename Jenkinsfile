@@ -13,7 +13,7 @@ pipeline {
             docker {
               image 'golang:latest'
                 //for cache error
-              args ' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+              args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                     //--network mynetwork1 --name mygolang
                     }
 
@@ -23,7 +23,7 @@ pipeline {
             print('Source Code Review Running in GoSec')
             echo 'cloning Gosec'
             sh 'curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin'
-            
+
 
             }
     }
