@@ -9,10 +9,22 @@ pipeline {
     }
     stage('Run Source Code Review')
     {
-      agent any
+      agent {
+            docker {
+              image 'golang:latest'
+                //for cache error
+              args ' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+                    //--network mynetwork1 --name mygolang
+                    }
+
+      }
       steps{
       //      sh 'docker network create -d bridge mynetwork1'
-            print('Source Code Review2 Running')
+            print('Source Code Review Running in GoSec')
+            echo 'cloning Gosec'
+            sh 'curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin'
+            
+
             }
     }
   /*  stage('Database setup')
@@ -31,7 +43,6 @@ pipeline {
     }
 
     */
-
    stage('Compile Go Application')
     {
       agent {
