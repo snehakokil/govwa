@@ -23,6 +23,21 @@ pipeline {
             print('Source Code Review Running in GoSec')
             echo 'cloning Gosec'
             sh 'curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin'
+            echo 'listing current folder contents for verification'
+            sh 'ls -l'
+            echo 'scanning gosec'
+            try{
+            sh 'gosec -fmt=json -out=results.json ./...'
+             }
+            catch(ex) {
+            echo 'go scan failed'
+            echo 'printing results'
+            sh 'cat results.json'
+                   }
+            finally
+            {
+            archiveArtifacts '*.json'
+             }
 
 
             }
