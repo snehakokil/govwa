@@ -27,7 +27,6 @@ pipeline {
             sh 'go get github.com/go-sql-driver/mysql'
             sh 'go get github.com/gorilla/sessions'
             sh 'go get github.com/julienschmidt/httprouter'
-            sh 'go run app.go'
             echo 'Source Code Review Running in GoSec'
             echo 'cloning Gosec'
             sh 'curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin'
