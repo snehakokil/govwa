@@ -7,7 +7,7 @@ pipeline {
         git(url: 'https://github.com/paroksh/govwa.git', branch: 'master')
       }
     }
-    stage('Run Source Code Review')
+    stage('Running Source Code Review using GoSec')
     {
       agent {
             docker {
@@ -23,7 +23,6 @@ pipeline {
           script{
             echo ' Importing dependencies'
             sh 'pwd'
-            sh 'go env'
             sh 'cd /go/src/'
             sh 'go get github.com/go-sql-driver/mysql'
             sh 'go get github.com/gorilla/sessions'
