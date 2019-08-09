@@ -20,7 +20,8 @@ pipeline {
       }
       steps{
       //      sh 'docker network create -d bridge mynetwork1'
-            print('Source Code Review Running in GoSec')
+          script{
+            echo 'Source Code Review Running in GoSec'
             echo 'cloning Gosec'
             sh 'curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin'
             echo 'listing current folder contents for verification'
@@ -39,7 +40,7 @@ pipeline {
             archiveArtifacts '*.json'
              }
 
-
+           }
             }
     }
   /*  stage('Database setup')
