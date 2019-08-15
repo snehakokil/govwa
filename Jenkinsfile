@@ -8,16 +8,27 @@ pipeline {
       }
     }
 
-    stage("3. SCA - Dependency Check") {
-      agent none
+    stage("2. SCA - Dependency Check GO Lang") {
+      agent {
+            docker {
+              image 'golang:alpine'
+              args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+                  }
+            }
       steps{
-        echo 'performing dependency check'
-        dependencyCheck
+        echo 'downloadind performing dependency check'
+        sh 'go get github.com/divan/depscheck'
+        sh 'cd /go/src/'
+        sh 'go get github.com/go-sql-driver/mysql'
+        sh 'go get github.com/gorilla/sessions'
+        sh 'go get github.com/julienschmidt/httprouter'
+        sh 'depscheck /go/src/govwa'
+
 
            }
          }
 
-    stage('2. Running Source Code Review using GoSec on Docker')
+    stage('3. Running Source Code Review using GoSec on Docker')
     {
       agent {
             docker {
