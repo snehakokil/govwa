@@ -7,6 +7,17 @@ pipeline {
         git(url: 'https://github.com/paroksh/govwa.git', branch: 'master')
       }
     }
+
+    stage("3. SCA - Dependency Check") {
+      agent any
+      steps{
+
+        echo 'performing dependency check'
+        dependencyCheckAnalyzer datadir: 'dependency-check-data', isFailOnErrorDisabled: true, hintsFile: '', includeCsvReports: false, includeHtmlReports: true, includeJsonReports: false, isAutoupdateDisabled: false, outdir: '', scanpath: '', skipOnScmChange: false, skipOnUpstreamChange: false, suppressionFile: '', zipExtensions: ''
+        dependencyCheckPublisher canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+                   }
+          }
+
     stage('2. Running Source Code Review using GoSec on Docker')
     {
       agent {
@@ -63,17 +74,6 @@ pipeline {
     }
 
     */
-  stage("3. SCA - Dependency Check") {
-    agent any
-    steps{
-
-                   echo 'performing dependency check'
-
-                   dependencyCheckAnalyzer datadir: 'dependency-check-data', isFailOnErrorDisabled: true, hintsFile: '', includeCsvReports: false, includeHtmlReports: true, includeJsonReports: false, isAutoupdateDisabled: false, outdir: '', scanpath: '', skipOnScmChange: false, skipOnUpstreamChange: false, suppressionFile: '', zipExtensions: ''
-
-                   dependencyCheckPublisher canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
-                 }
-        }          
 
    stage('4. Compile Go Application on Docker')
     {
