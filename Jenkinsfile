@@ -64,13 +64,15 @@ pipeline {
 
     */
   stage("3. SCA - Dependency Check") {
+    agent any
+    steps{
 
                    echo 'performing dependency check'
 
                    dependencyCheckAnalyzer datadir: 'dependency-check-data', isFailOnErrorDisabled: true, hintsFile: '', includeCsvReports: false, includeHtmlReports: true, includeJsonReports: false, isAutoupdateDisabled: false, outdir: '', scanpath: '', skipOnScmChange: false, skipOnUpstreamChange: false, suppressionFile: '', zipExtensions: ''
 
                    dependencyCheckPublisher canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
-
+                 }
         }          
 
    stage('4. Compile Go Application on Docker')
