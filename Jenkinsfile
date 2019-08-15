@@ -12,7 +12,7 @@ pipeline {
       agent none
       steps{
         echo 'performing dependency check'
-        dependencyCheck datadir: 'dependency-check-data', isFailOnErrorDisabled: true, hintsFile: '', includeCsvReports: false, includeHtmlReports: false, includeJsonReports: false, isAutoupdateDisabled: false, outdir: '', scanpath: '', skipOnScmChange: false, skipOnUpstreamChange: false, suppressionFile: '', zipExtensions: ''
+        dependencyCheck
 
            }
          }
