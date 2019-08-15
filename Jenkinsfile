@@ -1,23 +1,20 @@
 pipeline {
   agent none
   stages {
-    stage('Checkout Go Code') {
+    stage('1. Checkout Go Code') {
       agent any
       steps {
         git(url: 'https://github.com/paroksh/govwa.git', branch: 'master')
       }
     }
-    stage('Running Source Code Review using GoSec')
+    stage('2. Running Source Code Review using GoSec on Docker')
     {
       agent {
             docker {
               image 'golang:latest'
-                //for cache error
               args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
-                    //--network mynetwork1 --name mygolang
-                    }
-
-      }
+                  }
+            }
       steps{
       //      sh 'docker network create -d bridge mynetwork1'
           script{
@@ -66,7 +63,17 @@ pipeline {
     }
 
     */
-   stage('Compile Go Application')
+  stage("3. SCA - Dependency Check") {
+
+                   echo 'performing dependency check'
+
+                   dependencyCheckAnalyzer datadir: 'dependency-check-data', isFailOnErrorDisabled: true, hintsFile: '', includeCsvReports: false, includeHtmlReports: true, includeJsonReports: false, isAutoupdateDisabled: false, outdir: '', scanpath: '', skipOnScmChange: false, skipOnUpstreamChange: false, suppressionFile: '', zipExtensions: ''
+
+                   dependencyCheckPublisher canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+
+        }          
+
+   stage('4. Compile Go Application on Docker')
     {
       agent {
             docker {
