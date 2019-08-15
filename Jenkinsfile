@@ -9,15 +9,14 @@ pipeline {
     }
 
     stage("3. SCA - Dependency Check") {
-      agent any
+      agent none
       steps{
-
         echo 'performing dependency check'
         dependencyCheckAnalyzer datadir: 'dependency-check-data', isFailOnErrorDisabled: true, hintsFile: '', includeCsvReports: false, includeHtmlReports: false, includeJsonReports: false, isAutoupdateDisabled: false, outdir: '', scanpath: '', skipOnScmChange: false, skipOnUpstreamChange: false, suppressionFile: '', zipExtensions: ''
 
            }
          }
-         
+
     stage('2. Running Source Code Review using GoSec on Docker')
     {
       agent {
