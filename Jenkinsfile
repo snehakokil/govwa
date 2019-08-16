@@ -114,10 +114,7 @@ pipeline {
 
     */
 
-  stage ('Run Tests')
-  {
 
-  parallel {
    stage('4. Compile Go Application on Docker')
 
     {
@@ -125,7 +122,7 @@ pipeline {
             docker {
               image 'golang'
               //for cache error
-              args ' --network=host -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+              args ' - d --network=host -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                   //--network mynetwork1 --name mygolang
                   }
             }
@@ -147,7 +144,7 @@ pipeline {
              docker {
                image 'owasp/zap2docker-stable:latest'
                //for cache error
-               args ' --network=host -u 0 -v /var/lib/jenkins/workspace/govwa:/zap/wrk '
+               args ' --network=host -u 0 -v /var/lib/jenkins/workspace/govwa:/zap/wrk:rw '
                    //--network mynetwork1 --name mygolang
                    }
              }
@@ -159,8 +156,7 @@ pipeline {
        }
      }
 
-}
-}
+
 
   }
 }
