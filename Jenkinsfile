@@ -114,6 +114,10 @@ pipeline {
 
     */
 
+  stage ('Run Tests')
+  {
+
+  parallel {
    stage('4. Compile Go Application on Docker')
 
     {
@@ -136,6 +140,7 @@ pipeline {
       }
     }
 
+
     stage('5. Running ZAP')
      {
        agent {
@@ -154,8 +159,8 @@ pipeline {
        }
      }
 
-
-
+}
+}
 
   }
 }
