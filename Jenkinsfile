@@ -10,8 +10,8 @@ pipeline {
 
     stage("2. SCA - Dependency Check GO Lang") {
       agent {
-            docker {
-              image 'golang:alpine'
+            dockerfile {
+              filename 'GoAlpinewithgit'
               args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                   }
             }
@@ -23,7 +23,6 @@ pipeline {
         sh 'go get github.com/gorilla/sessions'
         sh 'go get github.com/julienschmidt/httprouter'
         sh 'depscheck /go/src/govwa'
-
 
            }
          }
