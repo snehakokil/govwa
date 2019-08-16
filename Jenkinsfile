@@ -22,7 +22,7 @@ pipeline {
         sh 'go get github.com/go-sql-driver/mysql'
         sh 'go get github.com/gorilla/sessions'
         sh 'go get github.com/julienschmidt/httprouter'
-        sh 'cd govwa
+        sh 'cd /go/src/govwa/'
         sh 'depscheck .'
 
            }
