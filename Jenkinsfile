@@ -8,7 +8,7 @@ pipeline {
       }
     }
 
-    stage("3. SCA - Dependency Check OWASP")
+/*    stage("3. SCA - Dependency Check OWASP")
     {
 
       environment {
@@ -41,7 +41,7 @@ pipeline {
               filename 'GoAlpinewithgit'
               args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                   }
-            } */
+            }
       steps{
         echo 'downloadind performing dependency check'
         sh 'go get github.com/divan/depscheck'
@@ -134,5 +134,25 @@ pipeline {
         sh 'go run app.go'
       }
     }
+
+    stage('5. Running ZAP')
+     {
+       agent {
+             docker {
+               image 'owasp/zap2docker-weekly'
+               //for cache error
+               args ' -v /var/lib/jenkins/workspace/govwa:/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -c baseline-scan.conf -t http://$(ifconfig en0 | grep "inet " | cut -d " " -f2):8082 -r baseline-scan-report.html'
+                   //--network mynetwork1 --name mygolang
+                   }
+             }
+       steps
+       {
+         echo 'zap running'
+
+       }
+     }
+
+
+
   }
 }
