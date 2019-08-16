@@ -145,7 +145,7 @@ pipeline {
              docker {
                image 'owasp/zap2docker-stable:latest'
                //for cache error
-               args '  -u 0 -v /var/lib/jenkins/workspace/govwa:/zap/wrk '
+               args ' --network=host -u 0 -v /var/lib/jenkins/workspace/govwa:/zap/wrk '
                    //--network mynetwork1 --name mygolang
                    }
              }
