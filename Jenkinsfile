@@ -38,9 +38,9 @@ pipeline {
         {
 
           environment {
-            OWASPDC_DIRECTORY= $HOME/OWASP-Dependency-Check
-            DATA_DIRECTORY= "$OWASPDC_DIRECTORY/data"
-            REPORT_DIRECTORY= "$OWASPDC_DIRECTORY/reports"
+            OWASPDC_DIRECTORY= "${HOME}/OWASP-Dependency-Check"
+            DATA_DIRECTORY= "${OWASPDC_DIRECTORY}/data"
+            REPORT_DIRECTORY= "${OWASPDC_DIRECTORY}/reports"
           }
 
            agent {
