@@ -145,7 +145,7 @@ pipeline {
              docker {
                image 'owasp/zap2docker-stable'
                //for cache error
-               args ' --entrypoint=\'\' -v /var/lib/jenkins/workspace/govwa:/zap/wrk/:rw -c baseline-scan.conf -t http://$(ifconfig en0 | grep "inet " | cut -d " " -f2):8082 -r baseline-scan-report.html'
+               args ' -v /var/lib/jenkins/workspace/govwa:/zap/wrk/:rw zap-baseline.py -t http://$(ifconfig en0 | grep "inet " | cut -d " " -f2):8082 -r baseline-scan-report.html'
                    //--network mynetwork1 --name mygolang
                    }
              }
