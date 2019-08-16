@@ -113,8 +113,10 @@ pipeline {
     }
 
     */
-
-
+  stage ('Running Tests')
+  {
+  parallel
+  {
    stage('4. Compile Go Application on Docker')
 
     {
@@ -156,7 +158,7 @@ pipeline {
        }
      }
 
-
-
+}
+}
   }
 }
