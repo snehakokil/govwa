@@ -120,7 +120,7 @@ pipeline {
     {
       agent {
             docker {
-              image 'golang'
+              image 'golang:latest'
               //for cache error
               args ' - d --network=host -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                   //--network mynetwork1 --name mygolang
