@@ -8,26 +8,24 @@ pipeline {
       }
     }
 
-/*    stage("3. SCA - Dependency Check OWASP")
+    stage("1. SCA - Dependency Check OWASP")
     {
-
-      environment {
-        OWASPDC_DIRECTORY= "${HOME}/OWASP-Dependency-Check"
-        DATA_DIRECTORY= "${OWASPDC_DIRECTORY}/data"
-        REPORT_DIRECTORY= "${OWASPDC_DIRECTORY}/reports"
-      }
 
        agent {
              docker {
                  image 'owasp/dependency-check'
-                 args ' -u 0 --entrypoint=\'\' -v /var/lib/jenkins/workspace/govwa:/src -v /var/lib/jenkins/OWASP-Dependency-Check/data:/usr/share/dependency-check/data -v /var/lib/jenkins/OWASP-Dependency-Check/reports:/report owasp/dependency-check --scan /src  --format "ALL" --project "My OWASP Dependency Check Project" --out /report '
+                 args ' -u 0  -v /var/lib/jenkins/workspace/govwa:/src -v /var/lib/jenkins/OWASP-Dependency-Check/data:/usr/share/dependency-check/data -v /var/lib/jenkins/OWASP-Dependency-Check/reports:/report  '
+                 //--entrypoint=\'\'
                    }
         }
 
        steps{
          echo 'Running ODC'
+         sh 'owasp/dependency-check --scan /src  --format "ALL" --project "My OWASP Dependency Check Project" --out /report '
        }
           }
+
+          /*
 
     stage("2. SCA - Dependency Check using DEPSCHECK") {
       agent {
