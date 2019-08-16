@@ -152,7 +152,7 @@ pipeline {
        steps
        {
          echo 'zap running'
-         sh 'zap-baseline.py -t http://$(ifconfig en0 | grep "inet " | cut -d " " -f2):8082 -r baseline-scan-report.html '
+         sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html '
 
        }
      }
