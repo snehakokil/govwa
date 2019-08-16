@@ -153,7 +153,7 @@ pipeline {
        steps
        {
          echo 'zap running'
-         sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html '
+         sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html -g gen.conf '
 
        }
      }
