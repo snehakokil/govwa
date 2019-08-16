@@ -14,8 +14,8 @@ pipeline {
        agent {
              docker {
                  image 'owasp/dependency-check'
-                 args ' -u 0  -v /var/lib/jenkins/workspace/govwa:/src -v /var/lib/jenkins/OWASP-Dependency-Check/data:/usr/share/dependency-check/data -v /var/lib/jenkins/OWASP-Dependency-Check/reports:/report  '
-                 //--entrypoint=\'\'
+                 args ' -u 0 --entrypoint=\'\' -v /var/lib/jenkins/workspace/govwa:/src -v /var/lib/jenkins/OWASP-Dependency-Check/data:/usr/share/dependency-check/data -v /var/lib/jenkins/OWASP-Dependency-Check/reports:/report  '
+                 
                    }
         }
 
