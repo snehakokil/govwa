@@ -64,21 +64,19 @@ pipeline {
         script
         {
             sh 'pwd'
-            sh 'apt-get install -y procps'
             sh 'cd /go/src/'
+            sh 'Getting dependencies'
             sh 'go get github.com/go-sql-driver/mysql'
             sh 'go get github.com/gorilla/sessions'
             sh 'go get github.com/julienschmidt/httprouter'
-            echo 'Source Code Review Running in GoSec'
             echo 'cloning Gosec'
             sh 'curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin'
             echo 'listing current folder contents for verification'
             sh 'cd /go/src/govwa'
-            sh 'ls -l'
-            echo 'scanning gosec'
+            echo 'SAST running with GOSEC'
             try
             {
-              sh 'gosec -include=G101,G203,G401 -fmt=json -out=results.json ./...'
+              sh 'gosec -fmt=json -out=results.json ./...'
               echo 'printing results'
             }
             catch(ex)
@@ -88,9 +86,9 @@ pipeline {
             finally
             { archiveArtifacts '*.json' }
 
-        }
-      }
-    }
+        } //end script
+      } //end steps
+    } //end stage
 
     stage ('3. Security Test Environment')
     {
