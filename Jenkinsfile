@@ -149,12 +149,21 @@ pipeline {
        steps
        {
          echo 'zap running'
+         try{
          sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html -g gen.conf '
-
+       }
+       catch(ex)
+       {
+         print " ZAP found issues : ${ex}"
+       }
+       finally
+       {
+      archiveArtifacts '*.html'
+       }
        }
      }
 
-}
-}
-  }
-}
+} // end parallel
+} //end running test stage
+  } //end stages
+} //end pipeline
