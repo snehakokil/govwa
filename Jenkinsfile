@@ -8,7 +8,7 @@ pipeline {
       }
     }
 
-    stage("1. SCA - Dependency Check OWASP")
+/*    stage("1. SCA - Dependency Check OWASP")
     {
 
        agent {
@@ -25,9 +25,9 @@ pipeline {
        }
           }
 
-          /*
+  */
 
-    stage("2. SCA - Dependency Check using DEPSCHECK") {
+    stage("1. SCA - Dependency Check using DEPSCHECK") {
       agent {
             docker {
                 image 'golang:latest'
@@ -39,7 +39,7 @@ pipeline {
               filename 'GoAlpinewithgit'
               args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                   }
-            }
+            }v*/
       steps{
         echo 'downloadind performing dependency check'
         sh 'go get github.com/divan/depscheck'
@@ -54,8 +54,7 @@ pipeline {
          }
 
 
-
-    stage('3. Running Source Code Review using GoSec on Docker')
+    stage('2. Running Source Code Review using GoSec on Docker')
     {
       agent {
             docker {
@@ -65,7 +64,7 @@ pipeline {
             }
       steps{
       //      sh 'docker network create -d bridge mynetwork1'
-          script{
+
             echo ' Importing dependencies'
             sh 'pwd'
             sh 'cd /go/src/'
@@ -79,22 +78,16 @@ pipeline {
             sh 'cd /go/src/govwa'
             sh 'ls -l'
             echo 'scanning gosec'
-            try{
             sh 'gosec -fmt=json -out=results.json ./...'
-             }
-            catch(ex) {
-            echo 'go scan failed'
             echo 'printing results'
             sh 'cat results.json'
-                   }
-            finally
-            {
-            archiveArtifacts '*.json'
+
+          //  archiveArtifacts '*.json'
              }
 
            }
-            }
-    }
+
+
   /*  stage('Database setup')
     {
       agent {
@@ -111,7 +104,7 @@ pipeline {
     }
 
     */
-  stage ('Running Tests')
+  stage ('3. Running Tests')
   {
   parallel
   {
