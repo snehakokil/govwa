@@ -64,8 +64,9 @@ pipeline {
             }
       steps{
       //      sh 'docker network create -d bridge mynetwork1'
+        echo ' Importing dependencies'
+        script {
 
-            echo ' Importing dependencies'
             sh 'pwd'
             sh 'cd /go/src/'
             sh 'go get github.com/go-sql-driver/mysql'
@@ -80,11 +81,11 @@ pipeline {
             echo 'scanning gosec'
             sh 'gosec -fmt=json -out=results.json ./...'
             echo 'printing results'
-          //  sh 'cat results.json'
+            sh 'cat results.json'
 
           //  archiveArtifacts '*.json'
              }
-
+           }
            }
 
 
