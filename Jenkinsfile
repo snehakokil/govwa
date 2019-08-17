@@ -79,11 +79,11 @@ pipeline {
             sh 'gosec -include=G101,G203,G401 -fmt=json -out=results.json ./...'
             echo 'printing results'
           }
-          catch (ex)
+          catch(ex)
           {
             print "Error cause: ${ex}"
+            }
 
-          }
           finally{
                          archiveArtifacts '*.json'
                      }
