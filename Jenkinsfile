@@ -76,9 +76,7 @@ pipeline {
             echo 'scanning gosec'
             sh 'gosec -fmt=json -out=results.json ./...'
             echo 'printing results'
-            sh 'cat results.json'
-
-          //  archiveArtifacts '*.json'
+            //  archiveArtifacts '*.json'
              }
            }
            }
