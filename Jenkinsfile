@@ -1,11 +1,12 @@
 pipeline {
   agent none
   stages {
-    stage('1. Checkout Go Code') {
-      agent any
+    stage('1. Checkout Go Code')
+    {
+    agent any
       steps {
-        git(url: 'https://github.com/paroksh/govwa.git', branch: 'master')
-      }
+            git(url: 'https://github.com/paroksh/govwa.git', branch: 'master')
+            }
     }
 
 /*    stage("1. SCA - Dependency Check OWASP")
@@ -27,15 +28,16 @@ pipeline {
 
   */
 
-/*  stage("1. SCA - Dependency Check using DEPSCHECK") {
+  stage("2. SCA - Dependency Check using DEPSCHECK")
+  {
       agent {
             docker {
-                image 'golang:latest'
-                args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
-                    }
-              }
-
-    steps{
+                    image 'golang:latest'
+                    args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+                   }
+            }
+      steps
+      {
         echo 'downloadind performing dependency check'
         sh 'go get github.com/divan/depscheck'
         sh 'cd /go/src/'
@@ -45,23 +47,22 @@ pipeline {
         //sh 'cd /go/src/govwa/'
         sh 'depscheck -v .'
 
-           }
-         }
-*/
+      }
+  }
 
-    stage('2. Running Source Code Review using GoSec on Docker')
-    {
+  stage('2. Running Source Code Review using GoSec on Docker')
+  {
       agent {
             docker {
-              image 'golang:latest'
-              args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
-                  }
+                    image 'golang:latest'
+                    args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+                   }
             }
-      steps{
-      //      sh 'docker network create -d bridge mynetwork1'
+      steps
+      {
         echo ' Importing dependencies'
-        script {
-
+        script
+        {
             sh 'pwd'
             sh 'apt-get install -y procps'
             sh 'cd /go/src/'
@@ -75,47 +76,28 @@ pipeline {
             sh 'cd /go/src/govwa'
             sh 'ls -l'
             echo 'scanning gosec'
-          try
-          {
-            sh 'gosec -include=G101,G203,G401 -fmt=json -out=results.json ./...'
-            echo 'printing results'
-          }
-          catch(ex)
-          {
+            try
+            {
+              sh 'gosec -include=G101,G203,G401 -fmt=json -out=results.json ./...'
+              echo 'printing results'
+            }
+            catch(ex)
+            {
             print "Error cause: ${ex}"
             }
+            finally
+            { archiveArtifacts '*.json' }
 
-          finally{
-                         archiveArtifacts '*.json'
-                     }
-             }
-           }
-           }
-
-
-  /*  stage('Database setup')
-    {
-      agent {
-            docker {
-              image 'mysql'
-              args '-d -p 3306:3306 --network mynetwork1 --name ammysql6 -e MYSQL_ROOT_PASSWORD=admin '
-                    }
-      }
-      steps {
-        sh ' mysql --version '
-        sh ' mysql -h 127.0.0.1 -p 3306 -u user -p pass123 firstdb '
-        sh ' CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) ); '
         }
-    }
+      }
 
-    */
-  stage ('3. Running Tests')
-  {
-  parallel
-  {
-   stage('4. Compile Go Application on Docker')
 
+    stage ('3. Security Test Environment')
     {
+      parallel
+      {
+        stage('4. Compile Go Application on Docker')
+        {
       agent {
             docker {
               image 'golang'
@@ -156,7 +138,7 @@ pipeline {
             catch(ex)
             { print " ZAP found issues : ${ex}" }
             finally
-            { archiveArtifacts '*.html'}
+            { archiveArtifacts '*.txt'}
                 } //end script
         }
      }
