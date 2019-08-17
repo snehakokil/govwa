@@ -74,7 +74,7 @@ pipeline {
             sh 'cd /go/src/govwa'
             sh 'ls -l'
             echo 'scanning gosec'
-            sh 'gosec -fmt=json -out=results.json ./...'
+            sh 'gosec -tag ignore -fmt=json -out=results.json ./...'
             echo 'printing results'
             //  archiveArtifacts '*.json'
              }
