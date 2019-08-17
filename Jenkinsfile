@@ -74,12 +74,14 @@ pipeline {
             sh 'cd /go/src/govwa'
             sh 'ls -l'
             echo 'scanning gosec'
-          try{
+          try
+          {
             sh 'gosec -include=G101,G203,G401 -fmt=json -out=results.json ./...'
             echo 'printing results'
           }
-          catch{
-            echo 'go scan failed'
+          catch (ex)
+          {
+            print "Error cause: ${ex}"
 
           }
           finally{
