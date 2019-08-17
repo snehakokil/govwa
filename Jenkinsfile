@@ -27,7 +27,7 @@ pipeline {
 
   */
 
-    stage("1. SCA - Dependency Check using DEPSCHECK") {
+/*  stage("1. SCA - Dependency Check using DEPSCHECK") {
       agent {
             docker {
                 image 'golang:latest'
@@ -35,12 +35,7 @@ pipeline {
                     }
               }
 
-        /*    dockerfile {
-              filename 'GoAlpinewithgit'
-              args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
-                  }
-            }v*/
-      steps{
+    steps{
         echo 'downloadind performing dependency check'
         sh 'go get github.com/divan/depscheck'
         sh 'cd /go/src/'
@@ -52,7 +47,7 @@ pipeline {
 
            }
          }
-
+*/
 
     stage('2. Running Source Code Review using GoSec on Docker')
     {
