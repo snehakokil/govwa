@@ -63,6 +63,7 @@ pipeline {
         script {
 
             sh 'pwd'
+            sh 'apt-get install -y procps'
             sh 'cd /go/src/'
             sh 'go get github.com/go-sql-driver/mysql'
             sh 'go get github.com/gorilla/sessions'
