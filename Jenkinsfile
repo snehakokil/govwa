@@ -90,60 +90,61 @@ pipeline {
 
         }
       }
-
+    }
 
     stage ('3. Security Test Environment')
     {
       parallel
       {
-        stage('4. Compile Go Application on Docker')
+        stage('4. Compile and Run GovWA Application on Docker')
         {
-      agent {
-            docker {
-              image 'golang'
+          agent {
+                 docker
+                 {
+                  image 'golang'
               //for cache error
-              args ' --network=host -d=true -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+                  args ' --network=host -d=true -e XDG_CACHE_HOME=\'/tmp/.cache\' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                   //--network mynetwork1 --name mygolang
                   }
-            }
-      steps
-      {
-        sh 'go env'
-        sh 'cd /go/src/'
-        sh 'go get github.com/go-sql-driver/mysql'
-        sh 'go get github.com/gorilla/sessions'
-        sh 'go get github.com/julienschmidt/httprouter'
-        sh 'go run app.go'
-      }
-    }
+                }
+          steps
+          {
+            sh 'go env'
+            sh 'cd /go/src/'
+            sh 'go get github.com/go-sql-driver/mysql'
+            sh 'go get github.com/gorilla/sessions'
+            sh 'go get github.com/julienschmidt/httprouter'
+            sh 'go run app.go'
+          }
+        }
 
-
-    stage('5. Running ZAP')
-     {
-       agent {
-             docker {
-               image 'owasp/zap2docker-stable:latest'
-               //for cache error
-               args ' --network=host -u 0 -v /var/lib/jenkins/workspace/govwa:/zap/wrk:rw '
+        stage('5. Running ZAP')
+        {
+          agent {
+                docker
+                  {
+                  image 'owasp/zap2docker-stable:latest'
+                  //for cache error
+                  args ' --network=host -u 0 -v /var/lib/jenkins/workspace/govwa:/zap/wrk:rw '
                    //--network mynetwork1 --name mygolang
-                   }
-             }
-       steps
-       {
-        script {
+                  }
+                }
+          steps
+          {
+            script
+            {
             echo 'zap running'
             try{
-              sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html -g gen.conf '
+                sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html -g gen.conf '
                }
             catch(ex)
             { print " ZAP found issues : ${ex}" }
             finally
             { archiveArtifacts '*.txt'}
-                } //end script
+            } //end script
+          }
         }
-     }
-
-} // end parallel
-} //end running test stage
+      } // end parallel
+    } //end running test stage
   } //end stages
 } //end pipeline
