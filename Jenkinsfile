@@ -33,7 +33,7 @@ pipeline {
       agent {
             docker {
                     image 'golang:latest'
-                    args ' -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
+                    args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                    }
             }
       steps
