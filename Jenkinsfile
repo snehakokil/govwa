@@ -145,6 +145,6 @@ pipeline {
           }
         }
       } // end parallel
-    } //end running test stage
+    } //end  test stage
   } //end stages
 } //end pipeline
