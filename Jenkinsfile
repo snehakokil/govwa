@@ -140,7 +140,7 @@ pipeline {
             catch(ex)
             { print " ZAP found issues : ${ex}" }
             finally
-            { archiveArtifacts '*.txt'}
+            { echo 'zap complete'}
             } //end script
           }
         }
