@@ -65,7 +65,7 @@ pipeline {
         {
             sh 'pwd'
             sh 'cd /go/src/'
-            sh 'Getting dependencies'
+      //      sh 'Getting dependencies'
         //    sh 'go get github.com/go-sql-driver/mysql'
         //    sh 'go get github.com/gorilla/sessions'
         //    sh 'go get github.com/julienschmidt/httprouter'
