@@ -54,7 +54,7 @@ pipeline {
   {
       agent {
             docker {
-                    image 'golang:latest'
+                    image 'golang'
                     args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                    }
             }
@@ -76,7 +76,7 @@ pipeline {
             echo 'SAST running with GOSEC'
             try
             {
-              sh 'gosec -fmt=json -out=results.json ./...'
+              sh 'gosec -include=G101,G203,G401 - -fmt=json -out=results.json ./...'
               echo 'printing results'
             }
             catch(ex)
