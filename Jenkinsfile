@@ -129,6 +129,7 @@ pipeline {
           steps
           {
             echo 'zap running'
+            sh ' rm -rf /tmp/.X11-unix/ '
           //  sh 'sleep 1m'
             sh 'zap-baseline.py -t http://localhost:8082 -r  -P 9090 baseline-scan-report.html '
             echo 'zap complete'
