@@ -132,7 +132,8 @@ pipeline {
             {
             echo 'zap running'
             try{
-                sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html -T 1 '
+                sh 'sleep 1m'
+                sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html '
                }
             catch(ex)
             { print " ZAP found issues : ${ex}" }
