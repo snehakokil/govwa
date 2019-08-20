@@ -89,7 +89,7 @@ pipeline {
       } //end steps
     } //end stage
 
-*/    stage ('3. Security Test Environment')
+    stage ('3. Security Test Environment')
     {
       parallel
       {
