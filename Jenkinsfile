@@ -122,26 +122,19 @@ pipeline {
                   {
                   image 'owasp/zap2docker-stable:latest'
                   //for cache error
-                  args ' --network=host -v /var/lib/jenkins/workspace/govwa:/zap/wrk:rw '
+                  args ' --network=host -u 0 -v /var/lib/jenkins/workspace/govwa:/zap/wrk:rw '
                    //--network mynetwork1 --name mygolang
                   }
                 }
           steps
           {
-            script
-            {
             echo 'zap running'
-            try{
-                sh 'sleep 1m'
-                sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html '
-               }
-            catch(ex)
-            { print " ZAP found issues : ${ex}" }
-            finally
-            { echo 'zap complete'}
-            } //end script
-          }
-        }
+          //  sh 'sleep 1m'
+            sh 'zap-baseline.py -t http://localhost:8082 -r baseline-scan-report.html '
+            echo 'zap complete'
+
+          } //end steps
+        } //end zap stage
       } // end parallel
     } //end  test stage
   } //end stages
