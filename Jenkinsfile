@@ -28,7 +28,7 @@ pipeline {
 
   */
 
-/*  stage("2. SCA - Dependency Check using DEPSCHECK")
+ stage("2. SCA - Dependency Check using DEPSCHECK")
   {
       agent {
             docker {
@@ -129,7 +129,7 @@ pipeline {
           steps
           {
             echo 'zap running'
-          //  sh 'sleep 1m'
+            sh 'sleep 1m'
             sh 'zap-baseline.py -t http://localhost:8082 -r  baseline-scan-report.html '
             echo 'zap complete'
 
