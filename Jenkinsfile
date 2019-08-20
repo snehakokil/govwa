@@ -71,7 +71,7 @@ pipeline {
         //    sh 'go get github.com/julienschmidt/httprouter'
           //  sh 'cloning Gosec'
             sh 'curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin'
-            echo 'listing current folder contents for verification'
+        //    echo 'listing current folder contents for verification'
             sh 'cd /go/src/govwa'
             echo 'SAST running with GOSEC'
             try
