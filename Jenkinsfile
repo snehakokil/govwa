@@ -60,16 +60,15 @@ pipeline {
             }
       steps
       {
-        echo ' Importing dependencies'
             sh 'pwd'
             sh 'cd /go/src/'
-      //      sh 'Getting dependencies'
-        //    sh 'go get github.com/go-sql-driver/mysql'
-        //    sh 'go get github.com/gorilla/sessions'
-        //    sh 'go get github.com/julienschmidt/httprouter'
-          //  sh 'cloning Gosec'
+            echo 'Getting dependencies'
+            sh 'go get github.com/go-sql-driver/mysql'
+            sh 'go get github.com/gorilla/sessions'
+            sh 'go get github.com/julienschmidt/httprouter'
+            sh 'cloning Gosec'
             sh 'curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin'
-        //    echo 'listing current folder contents for verification'
+            echo 'listing current folder contents for verification'
             sh 'cd /go/src/govwa'
             echo 'SAST running with GOSEC'
             script
@@ -84,7 +83,7 @@ pipeline {
             print "Error cause: ${ex}"
             }
             finally
-            { archiveArtifacts '*.json' }
+            { print "SAST scanning complete" }
 
         } //end script
       } //end steps
