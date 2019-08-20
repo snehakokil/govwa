@@ -61,8 +61,6 @@ pipeline {
       steps
       {
         echo ' Importing dependencies'
-        script
-        {
             sh 'pwd'
             sh 'cd /go/src/'
       //      sh 'Getting dependencies'
@@ -74,6 +72,8 @@ pipeline {
         //    echo 'listing current folder contents for verification'
             sh 'cd /go/src/govwa'
             echo 'SAST running with GOSEC'
+            script
+            {
             try
             {
               sh 'gosec -include=G101,G203,G401 - -fmt=json -out=results.json ./...'
