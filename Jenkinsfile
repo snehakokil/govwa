@@ -28,7 +28,7 @@ pipeline {
 
   */
 
-  stage("2. SCA - Dependency Check using DEPSCHECK")
+/*  stage("2. SCA - Dependency Check using DEPSCHECK")
   {
       agent {
             docker {
@@ -89,7 +89,7 @@ pipeline {
       } //end steps
     } //end stage
 
-    stage ('3. Security Test Environment')
+*/    stage ('3. Security Test Environment')
     {
       parallel
       {
