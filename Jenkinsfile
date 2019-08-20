@@ -54,7 +54,7 @@ pipeline {
   {
       agent {
             docker {
-                    image 'golang'
+                    image 'golang:latest'
                     args ' -u 0 -v /var/lib/jenkins/workspace/govwa:/go/src/govwa'
                    }
             }
@@ -69,7 +69,7 @@ pipeline {
         //    sh 'go get github.com/go-sql-driver/mysql'
         //    sh 'go get github.com/gorilla/sessions'
         //    sh 'go get github.com/julienschmidt/httprouter'
-            echo 'cloning Gosec'
+          //  sh 'cloning Gosec'
             sh 'curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin'
             echo 'listing current folder contents for verification'
             sh 'cd /go/src/govwa'
