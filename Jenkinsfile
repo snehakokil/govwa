@@ -130,6 +130,7 @@ pipeline {
                 }
           steps
           {
+            script{
             try{
               sh 'sleep 1m'
           //  sh 'zap-baseline.py -t http://localhost:8082 -r  baseline-scan-report.html '
@@ -141,7 +142,8 @@ pipeline {
           {
             echo "Caught: ${err}"
           }
-          } //end steps
+          } //end script
+        } //end steps
         } //end zap stage
       } // end parallel
     } //end  test stage
