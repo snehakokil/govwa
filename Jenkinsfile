@@ -147,5 +147,10 @@ pipeline {
         } //end zap stage
       } // end parallel
     } //end  test stage
-  } //end stages
+  }
+  post {
+        always {
+            archiveArtifacts artifacts:'*.json'
+        }
+    }//end stages
 } //end pipeline
