@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-/*    stage('1. Checkout Go Code')
+    stage('1. Checkout Go Code')
     {
     agent any
       steps {
@@ -25,7 +25,7 @@ pipeline {
          sh 'owasp/dependency-check --scan /src  --format "ALL" --project "My OWASP Dependency Check Project" --out /report '
        }
           }
-
+*/
 
 
  stage("2. SCA - Dependency Check using DEPSCHECK")
@@ -89,7 +89,7 @@ pipeline {
       } //end steps
     } //end stage
 
-    */
+
 
     stage ('3. Security Test Environment')
     {
