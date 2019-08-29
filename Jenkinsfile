@@ -132,7 +132,8 @@ pipeline {
           {
             echo 'zap running'
             sh 'sleep 1m'
-            sh 'zap-baseline.py -t http://localhost:8082 -r  baseline-scan-report.html '
+          //  sh 'zap-baseline.py -t http://localhost:8082 -r  baseline-scan-report.html '
+            sh 'zap-cli quick-scan -sc -o \'-config api.disablekey=true\'  http://localhost:8082 '
             echo 'zap complete'
 
           } //end steps
