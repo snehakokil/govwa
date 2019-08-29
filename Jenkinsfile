@@ -122,7 +122,7 @@ pipeline {
           agent {
                 docker
                   {
-                  image 'owasp/zap2docker-stable'
+                  image 'owasp/zap2docker-weekly'
                   //for cache error
                   args ' --network=host -u 0 -v /var/lib/jenkins/workspace/govwa:/zap/wrk:rw '
                    //--network mynetwork1 --name mygolang
@@ -133,7 +133,9 @@ pipeline {
             echo 'zap running'
           //  sh 'sleep 1m'
           //  sh 'zap-baseline.py -t http://localhost:8082 -r  baseline-scan-report.html '
-            sh 'zap-cli -p 8090 quick-scan -sc -o \'-config api.disablekey=true\'  http://localhost:8082 '
+          //  sh 'zap-cli open-url http://localhost:8082 '
+            sh 'zap-cli --help'
+            sh 'zap-cli -p 8090 quick-scan -sc -o \'-config api.disablekey=true\' --log-path http://localhost:8082/login '
             echo 'zap complete'
 
           } //end steps
