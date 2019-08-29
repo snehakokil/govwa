@@ -27,7 +27,7 @@ pipeline {
           }
 */
 
-
+/*
  stage("2. SCA - Dependency Check using DEPSCHECK")
   {
       agent {
@@ -83,14 +83,17 @@ pipeline {
             print "Error cause: ${ex}"
             }
             finally
-            { print "SAST scanning complete" }
+            {
+              archiveArtifacts '*.json'
+              print "SAST scanning complete"
+            }
 
         } //end script
       } //end steps
     } //end stage
 
 
-
+*/
     stage ('3. Security Test Environment')
     {
       parallel
@@ -135,7 +138,7 @@ pipeline {
               sh 'sleep 1m'
           //  sh 'zap-baseline.py -t http://localhost:8082 -r  baseline-scan-report.html '
           //  sh 'zap-cli open-url http://localhost:8082 '
-              sh 'zap-cli -p 8090 -v quick-scan -sc -l Informational -o \'-config api.disablekey=true\' http://localhost:8082 '
+              sh 'zap-cli -p 8090 -v quick-scan -sc -l Informational  report Generate HTML -o \'-config api.disablekey=true\' http://localhost:8082 '
               echo 'zap complete'
               }
           catch (err)
@@ -150,7 +153,7 @@ pipeline {
   }
   post {
         always {
-            archiveArtifacts artifacts:'*.json'
+            archiveArtifacts artifacts:'*.html'
         }
     }//end stages
 } //end pipeline
