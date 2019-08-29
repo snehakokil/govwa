@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-    stage('1. Checkout Go Code')
+/*    stage('1. Checkout Go Code')
     {
     agent any
       steps {
@@ -26,7 +26,7 @@ pipeline {
        }
           }
 
-  */
+
 
  stage("2. SCA - Dependency Check using DEPSCHECK")
   {
@@ -88,6 +88,8 @@ pipeline {
         } //end script
       } //end steps
     } //end stage
+
+    */
 
     stage ('3. Security Test Environment')
     {
