@@ -8,7 +8,6 @@ pipeline {
             git(url: 'https://github.com/paroksh/govwa.git', branch: 'master')
             }
     }
-
 /*    stage("1. SCA - Dependency Check OWASP")
     {
 
@@ -45,7 +44,6 @@ pipeline {
         sh 'go get github.com/julienschmidt/httprouter'
         //sh 'cd /go/src/govwa/'
         sh 'depscheck -v .'
-
       }
   }
 
@@ -86,13 +84,10 @@ pipeline {
               archiveArtifacts '*.json'
               print "SAST scanning complete"
             }
-
         } //end script
       } //end steps
     } //end stage
 
-
-*/
     stage ('4. Security Test Environment')
     {
       parallel
