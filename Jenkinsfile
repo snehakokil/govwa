@@ -138,7 +138,7 @@ pipeline {
               sh 'sleep 1m'
           //  sh 'zap-baseline.py -t http://localhost:8082 -r  baseline-scan-report.html '
           //    sh 'zap-cli -p 8090 -v quick-scan -sc -l Informational -o \'-config api.disablekey=true\' http://localhost:8082/ report -f json -o report.json'
-              sh 'zap-cli -p 8090 -v start && zap-cli -v quick-scan -l Informational -o \'-config api.disablekey=true\' http://localhost:8082/ && zap-cli -v report --output test.xml --format xml && zap-cli -v shutdown '
+              sh 'zap-cli -p 8090 -v start && zap-cli -v quick-scan -l Informational -o \'-config api.disablekey=true\' http://localhost:8082/ && zap-cli -v report --output test.html --format html && zap-cli -v shutdown '
 
 
               echo 'zap complete'
