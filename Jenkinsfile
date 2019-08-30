@@ -135,10 +135,8 @@ pipeline {
           {
             script{
             try{
-              sh 'sleep 1m'
-          //  sh 'zap-baseline.py -t http://localhost:8082 -r  baseline-scan-report.html '
-              sh 'zap-cli report -help '
-              sh 'zap-cli -p 8090 -v quick-scan -sc -l Informational -o \'-config api.disablekey=true\' http://localhost:8082 && zap-cli report -o test.json -f json'
+            //  sh 'zap-baseline.py -t http://localhost:8082 -r  baseline-scan-report.html '
+              sh 'zap-cli -p 8090 -v quick-scan -sc -l Informational -o \'-config api.disablekey=true\' http://localhost:8082/ '
               echo 'zap complete'
               }
           catch (err)
