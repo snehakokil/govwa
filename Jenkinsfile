@@ -27,7 +27,6 @@ pipeline {
           }
 */
 
-/*
  stage("2. SCA - Dependency Check using DEPSCHECK")
   {
       agent {
@@ -50,7 +49,7 @@ pipeline {
       }
   }
 
-  stage('2. Running Source Code Review using GoSec on Docker')
+  stage('3. Running Source Code Review using GoSec on Docker')
   {
       agent {
             docker {
@@ -94,7 +93,7 @@ pipeline {
 
 
 */
-    stage ('3. Security Test Environment')
+    stage ('4. Security Test Environment')
     {
       parallel
       {
@@ -126,7 +125,6 @@ pipeline {
                 docker
                   {
                   image 'owasp/zap2docker-stable'
-                  //for cache error
                   args ' --network=host -u 0 -v /var/lib/jenkins/workspace/govwa:/zap/wrk:rw '
                    //--network mynetwork1 --name mygolang
                   }
@@ -149,10 +147,5 @@ pipeline {
         } //end zap stage
       } // end parallel
     } //end  test stage
-  }
-  post {
-        always {
-            archiveArtifacts artifacts:'*.html'
-        }
-    }//end stages
+  } //end stages
 } //end pipeline
