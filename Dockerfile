@@ -2,6 +2,7 @@
 FROM golang:latest
 
 RUN go env
+COPY * /go/src/govwa
 RUN cd /go/src/
 RUN go get github.com/go-sql-driver/mysql
 RUN go get github.com/gorilla/sessions
