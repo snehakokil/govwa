@@ -3,10 +3,11 @@ FROM golang:latest
 
 RUN go env
 COPY * /go/src/govwa/
+COPY app.go /go/src/
 RUN cd /go/src/
 RUN go get github.com/go-sql-driver/mysql
 RUN go get github.com/gorilla/sessions
 RUN go get github.com/julienschmidt/httprouter
-RUN go run /go/src/govwa/app.go
+RUN go run app.go
 
 EXPOSE 8082
