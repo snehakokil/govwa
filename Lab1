@@ -1,0 +1,39 @@
+pipeline {
+    agent any 
+    stages {       
+        stage('Checkout'){
+            agent { 
+                docker { 
+                    image 'golang'
+                    args ' -u 0 -v ${WORKSPACE}:/go/src/govwa:rw'                    
+                } 
+            }
+            steps {
+                git(url: 'https://github.com/snehakokil/govwa.git', branch: 'master')
+                stash name:'dockerfile', includes: '**/Dockerfile'
+            }
+        }//stage
+        
+        	stage('Build') {
+            agent { 
+                docker { 
+                    image 'golang'
+                    args ' -u 0 -v ${WORKSPACE}:/go/src/govwa:rw'
+                    
+                } 
+            }
+            steps {
+                
+                sh 'cd /go/src'
+                sh 'go get github.com/go-sql-driver/mysql'
+                sh 'go get github.com/gorilla/sessions'
+                sh 'go get github.com/julienschmidt/httprouter'
+                
+
+                // Build the app.
+                sh 'go build' 
+                stash name:'CompiledSource', includes:'**/**'
+            }            
+        }
+		    } //stages
+}//pipeline
