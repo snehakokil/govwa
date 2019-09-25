@@ -70,3 +70,5 @@ pipeline {
                 } //end script
             }            
         }
+		    } //stages
+}//pipeline
